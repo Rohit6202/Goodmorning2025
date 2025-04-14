@@ -1,0 +1,354 @@
+<script type="text/javascript">
+    var gk_fileData = {};
+    function loadFileData(filename) {
+      return gk_fileData[filename] || "";
+    }
+    </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Night Greeting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0B0C10;
+            color: #FFFFFF;
+            font-family: sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1, h2 {
+            color: #66FCF1;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        #greeting { animation-delay: 0s; }
+        #poetry { animation-delay: 1s; }
+        #quotes { animation-delay: 2s; }
+        #affirmations { animation-delay: 3s; }
+        #reflection { animation-delay: 4s; }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        #message {
+            font-size: 24px;
+            background: linear-gradient(to right, #66FCF1, #45A29E);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 5s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #poetry p {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #66FCF1;
+        }
+
+        ul {
+            list-style: none;
+            margin: 10px 0;
+        }
+
+        ul li:before {
+            content: '\f005';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: #66FCF1;
+            margin-right: 10px;
+        }
+
+        .full-moon {
+            position: absolute;
+            top: 10vh;
+            right: 10vw;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at center, #FFFFFF 20%, #66FCF1 60%, transparent 80%);
+            border-radius: 50%;
+            box-shadow: 0 0 30px #66FCF1;
+            animation: rise 10s ease-in-out forwards, pulse 3s ease-in-out 10s infinite;
+            z-index: 0;
+        }
+
+        @keyframes rise {
+            from { transform: translateY(100vh) scale(0.5); }
+            to { transform: translateY(0) scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 0 30px #66FCF1; }
+            50% { transform: translateY(0) scale(1.2); box-shadow: 0 0 50px #66FCF1; }
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #66FCF1;
+            animation: twinkle 2s infinite;
+            z-index: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .firefly {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: radial-gradient(circle, #66FCF1, transparent);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        @keyframes fly {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(var(--x1), var(--y1)); }
+            50% { transform: translate(var(--x2), var(--y2)); }
+            75% { transform: translate(var(--x3), var(--y3)); }
+            100% { transform: translate(var(--x4), var(--y4)); }
+        }
+
+        @keyframes fade {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .button {
+            background-color: #66FCF1;
+            color: #0B0C10;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #45A29E;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .social-links a {
+            color: #66FCF1;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .star:nth-child(n+11) {
+                display: none;
+            }
+            .full-moon {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="full-moon"></div>
+    <div class="container">
+        <section id="greeting" class="fade-in">
+            <h1>Good Night, <span id="user-name"></span>!</h1>
+            <p id="message">Sweet dreams!</p>
+        </section>
+
+        <section id="poetry" class="fade-in">
+            <h2>शुभ रात्रि कविता</h2>
+            <p>रात का समय आ गया है,<br>सपनों की दुनिया में खो जाओ।<br>चाँद और तारे आपकी रक्षा करें,<br>शुभ रात्रि, मीठे सपने देखें।</p>
+        </section>
+
+        <section id="quotes" class="fade-in">
+            <h2>Inspirational Quotes</h2>
+            <p>"The day is over, it’s time for rest. Sleep well, my dear, you did your best."</p>
+        </section>
+
+        <section id="affirmations" class="fade-in">
+            <h2>Bedtime Affirmations</h2>
+            <ul>
+                <li>I am grateful for today.</li>
+                <li>I release all worries and embrace peace.</li>
+                <li>I am ready for a restful sleep.</li>
+            </ul>
+        </section>
+
+        <section id="reflection" class="fade-in">
+            <h2>Nighttime Reflection</h2>
+            <p>Take a moment to let go of the day’s troubles and welcome the calm of the night.</p>
+        </section>
+
+        <div class="buttons">
+            <button id="firefly-button" class="button">Release Fireflies</button>
+            <a id="whatsapp-share" href="#" class="button">Share on WhatsApp</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.facebook.com/rohitrajj6202"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/rohitrajj6202?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>©Rohit Raj 2025 Good Night Greetings</p>
+    </footer>
+
+    <!-- Audio element for fireflies sound (replace with a real audio file) -->
+    <audio id="firefly-sound" src="fireflies.mp3" preload="auto"></audio>
+
+    <script>
+        var gk_fileData = {};
+        function loadFileData(filename) {
+            return gk_fileData[filename] || "";
+        }
+
+        // Prompt for user's name
+        const userName = window.prompt("Please enter your name:") || "Friend";
+        document.getElementById('user-name').textContent = userName;
+
+        // Cycle through good night messages
+        const messages = ["Sweet dreams!", "Sleep tight!", "Rest well!", "Good night!"];
+        let index = 0;
+        setInterval(() => {
+            document.getElementById('message').textContent = messages[index];
+            index = (index + 1) % messages.length;
+        }, 5000);
+
+        // Create twinkling stars
+        function createStars() {
+            const numStars = 20;
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const side = Math.floor(Math.random() * 4);
+                let x, y;
+                if (side === 0) { // top
+                    x = Math.random() * 100;
+                    y = 0;
+                } else if (side === 1) { // right
+                    x = 100;
+                    y = Math.random() * 100;
+                } else if (side === 2) { // bottom
+                    x = Math.random() * 100;
+                    y = 100;
+                } else { // left
+                    x = 0;
+                    y = Math.random() * 100;
+                }
+                star.style.left = `${x}vw`;
+                star.style.top = `${y}vh`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                document.body.appendChild(star);
+            }
+        }
+        createStars();
+
+        // Create fireflies on button click
+        document.getElementById('firefly-button').addEventListener('click', function() {
+            // Remove existing fireflies
+            document.querySelectorAll('.firefly').forEach(firefly => firefly.remove());
+            
+            // Play firefly sound
+            const sound = document.getElementById('firefly-sound');
+            sound.volume = 0.3; // Gentle volume
+            sound.currentTime = 0; // Restart sound
+            sound.play().catch(function(error) {
+                console.log("Audio playback failed: ", error);
+            });
+            
+            const numFireflies = 50;
+            for (let i = 0; i < numFireflies; i++) {
+                const firefly = document.createElement('div');
+                firefly.className = 'firefly';
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                firefly.style.left = `${x}px`;
+                firefly.style.top = `${y}px`;
+                const duration = 5 + Math.random() * 5;
+                firefly.style.animation = `fly ${duration}s linear, fade ${duration}s linear`;
+                const x1 = (Math.random() - 0.5) * 200;
+                const y1 = (Math.random() - 0.5) * 200;
+                const x2 = (Math.random() - 0.5) * 200;
+                const y2 = (Math.random() - 0.5) * 200;
+                const x3 = (Math.random() - 0.5) * 200;
+                const y3 = (Math.random() - 0.5) * 200;
+                const x4 = (Math.random() - 0.5) * 200;
+                const y4 = (Math.random() - 0.5) * 200;
+                firefly.style.setProperty('--x1', `${x1}px`);
+                firefly.style.setProperty('--y1', `${y1}px`);
+                firefly.style.setProperty('--x2', `${x2}px`);
+                firefly.style.setProperty('--y2', `${y2}px`);
+                firefly.style.setProperty('--x3', `${x3}px`);
+                firefly.style.setProperty('--y3', `${y3}px`);
+                firefly.style.setProperty('--x4', `${x4}px`);
+                firefly.style.setProperty('--y4', `${y4}px`);
+                document.body.appendChild(firefly);
+                
+                // Remove firefly after animation ends
+                firefly.addEventListener('animationend', (event) => {
+                    if (event.animationName === 'fade') {
+                        firefly.remove();
+                    }
+                });
+            }
+        });
+
+        // WhatsApp share functionality
+        const shareButton = document.getElementById('whatsapp-share');
+        const currentUrl = window.location.href;
+        const shareText = "Check out this beautiful good night greeting! " + currentUrl;
+        const encodedText = encodeURIComponent(shareText);
+        shareButton.href = "https://api.whatsapp.com/send?text=" + encodedText;
+    </script>
+</body>
+</html>
